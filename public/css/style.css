@@ -21,6 +21,10 @@ body {
   color: #ffffff;
 }
 
+a {
+  color: #232425;
+}
+
 #left {
   position: absolute;
   left: 0px;
