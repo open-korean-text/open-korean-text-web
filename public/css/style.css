@@ -1,9 +1,5 @@
 body {
-  background-image: url('img/logo.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: left bottom;
-
+  background:url(../img/logo.png) fixed no-repeat bottom left;
   font-family: Roboto, Arial, sans-serif;
   background-color: #f2f2f7;
   color: rgba(0,0,0,0.87);
