@@ -1,6 +1,6 @@
 function requestError(err) {
   $('.loading').addClass('hide')
-  console.log("Fetch failed!", err);
+  alert("Fetch failed!", err);
 }
 
 function color_code(key, value) {
@@ -20,7 +20,7 @@ function requestSuccess(res) {
       Elem.koreanResult.innerHTML = JSON.stringify(data, color_code, 4);
     });
   } else {
-    console.log("Looks like the response wasn't perfect, got status", res.status);
+    alert("Looks like the response wasn't perfect, got status", res.status);
   }
 }
 
