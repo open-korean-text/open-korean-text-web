@@ -28,7 +28,7 @@ function checkKoreanInput() {
   const koreanLen = Elem.koreanInput.value.length;
 
   if (koreanLen > 1000) {
-    alert('The text length was exceed');
+    alert('Sorry, the input is limited to 1000 characters.');
     var koreanText = Elem.koreanInput.value;
     Elem.koreanInput.value = koreanText.substr(0, 1000);
     Elem.koreanLen.innerText = '1000/1000';
