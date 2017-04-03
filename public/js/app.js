@@ -18,7 +18,7 @@ function requestSuccess(res) {
   if (res.ok) {
     res.json().then(data => {
       Elem.koreanResult.innerHTML = JSON.stringify(data, color_code, 4);
-    });x
+    });
   } else {
     Materialize.toast("Looks like the response wasn't perfect... Status " + res.status, 4000, 'red');
   }
