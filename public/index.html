@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>open-korean-text-web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <h1 class="title">open-korean-text</h1>
+  </div>
+
+  <div class="main_container">
+    <div class="row">
+
+      <div class="col s12 m6 l6">
+        <div class='control_box'>
+          <div class="character_counter" id="korean_len">
+            0/1000
+          </div>
+        </div>
+        <textarea class='textbox' id="korean_input"></textarea>
+      </div>
+
+      <div class="col s12 m6 l6">
+        <div class='control_box'>
+          <div class="button_container">
+            <a class='action_button black-text grey lighten-4 waves-effect waves-dark btn' id="normalize_button">Normalize</a>
+            <a class='action_button black-text grey lighten-4 waves-effect waves-dark btn' id="tokenize_button">Tokenize</a>
+            <a class='action_button black-text grey lighten-4 waves-effect waves-dark btn' id="extract_phrases_button">Extract Phrases</a>
+          </div>
+        </div>
+
+        <div class='textbox' id="korean_result"></div>
+
+        <div class='control_box'>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id='github'>
+    <img src=img/github.svg class="github_logo">
+    <a href="https://github.com/open-korean-text/open-korean-text">open-korean-text github</a>
+  </div>
+</body>
+</html>
