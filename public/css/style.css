@@ -1,148 +1,154 @@
 body {
-  background:url(../img/logo.png) fixed no-repeat bottom left;
-  font-family: Roboto, Arial, sans-serif;
-  background-color: #f2f2f7;
-  color: rgba(0,0,0,0.87);
-  margin: 0;
-  padding: 0;
+    background: url(../img/logo.png) fixed no-repeat bottom left;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #f2f2f7;
+    color: rgba(0, 0, 0, 0.87);
+    margin: 0;
+    padding: 0;
 }
 
 .header {
-  background-image: linear-gradient(to right, #ff53a9, #bf83be 31%, #86acd0 66%, #2cd6f7);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  padding: 22px;
-  padding-left: 60px;
+    background-image: linear-gradient(to right, #ff53a9, #bf83be 31%, #86acd0 66%, #2cd6f7);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    padding-left: 60px;
 }
 
 .title {
-  height: 27px;
-  font-family: Avenir;
-  font-size: 20px;
-  color: #ffffff;
+    height: 27px;
+    font-family: Avenir;
+    font-size: 20px;
+    color: #ffffff;
 }
 
 a {
-  color: #232425;
+    color: #232425;
 }
 
 #left {
-  position: absolute;
-  left: 0px;
-  width: 50%;
+    position: absolute;
+    left: 0px;
+    width: 50%;
 }
 
-
 #right {
-  position: absolute;
-  right: 0px;
-  width: 50%;
+    position: absolute;
+    right: 0px;
+    width: 50%;
 }
 
 .clear {
-  clear: both;
+    clear: both;
 }
 
 .tab_custom {
-  background-color:transparent;
-  padding: 0px;
+    background-color: transparent;
+    padding: 0px;
 }
 
 .tab a {
-  color: #232425 !important;
-  font-size: 12px !important;
-  text-transform: none !important;
-  text-overflow: none !important;
+    color: #232425 !important;
+    font-size: 12px !important;
+    text-transform: none !important;
+    text-overflow: none !important;
 }
 
 .control_box {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  white-space:nowrap;
-  overflow: hidden;
-  font-size: 0px;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0px;
 }
 
 .character_counter {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
 }
 
 .button_container {
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  width: 100%;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
 }
 
 .textbox {
-  width: 100%;
-  min-height: 200px;
-  margin: 0;
-  background-color: #fff;
-  white-space: pre-wrap;       /* Since CSS 2.1 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    width: 100%;
+    min-height: 200px;
+    margin: 0;
+    background-color: #fff;
+    white-space: pre-wrap; /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 .main_container {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .action_button {
-  width: 33.3%;
-  max-width: 130px;
+    width: 33.3%;
+    max-width: 130px;
 
-  height: 41px;
-  border: solid 1px #cccccc;
+    height: 41px;
+    border: solid 1px #cccccc;
 
-  display:inline-block;
+    display: inline-block;
 
-  text-align: center;
+    text-align: center;
 
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 12px;
-  line-height: 41px;
-  background-image: linear-gradient(to bottom, #f8f8f8, #ffffff 48%, #f0f0f0);
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 12px;
+    line-height: 41px;
+    background-image: linear-gradient(to bottom, #f8f8f8, #ffffff 48%, #f0f0f0);
 
 }
 
 .active_button {
-  box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, 0.2), inset -2px -2px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, 0.2), inset -2px -2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 #github {
-  clear: both;
-  float: right;
-  padding: 20px;
-  height: 60px;
-  padding-right: 20px;
-  padding-top: 50px;
-  vertical-align: middle;
-  text-decoration: none;
+    clear: both;
+    float: right;
+    padding: 20px;
+    height: 60px;
+    padding-right: 20px;
+    padding-top: 50px;
+    vertical-align: middle;
+    text-decoration: none;
 }
 
 .github_logo {
-  vertical-align: middle;
-  padding-right: 20px;
+    vertical-align: middle;
+    padding-right: 20px;
 }
 
 .col {
-  height: 100%
+    height: 100%
 }
 
 .noun {
-  color: #86acd0;
+    color: #86acd0;
 }
 
 .around-noun {
-  color: #2cd6f7;
+    color: #2cd6f7;
+}
+
+.loading {
+    position: relative;
+    top: 80px;
+    left: 48%;
+    float: left;
 }

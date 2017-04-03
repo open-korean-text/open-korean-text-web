@@ -1,4 +1,5 @@
 function requestError(err) {
+  $('.loading').addClass('hide')
   console.log("Fetch failed!", err);
 }
 
@@ -13,6 +14,7 @@ function color_code(key, value) {
 }
 
 function requestSuccess(res) {
+  $('.loading').addClass('hide')
   if (res.ok) {
     res.json().then(data => {
       Elem.koreanResult.innerHTML = JSON.stringify(data, color_code, 4);
@@ -23,6 +25,7 @@ function requestSuccess(res) {
 }
 
 function requestProcess(api, text) {
+  $('.loading').removeClass('hide')
   const url = `https://open-korean-text.herokuapp.com/${api}?text=${text}`;
   const method = 'GET';
   fetch(url, { method }).then(requestSuccess, requestError);
