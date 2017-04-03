@@ -80,7 +80,13 @@ a {
 .textbox {
   width: 100%;
   min-height: 200px;
+  margin: 0;
   background-color: #fff;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 .main_container {
@@ -131,4 +137,12 @@ a {
 
 .col {
   height: 100%
+}
+
+.noun {
+  color: #86acd0;
+}
+
+.around-noun {
+  color: #2cd6f7;
 }

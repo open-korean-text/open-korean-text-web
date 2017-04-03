@@ -2,10 +2,20 @@ function requestError(err) {
   console.log("Fetch failed!", err);
 }
 
+function color_code(key, value) {
+  if (typeof value === 'string' && value.match(/\(Noun:/)) {
+    return "<span class='noun'>" + value + "</span>";
+  }
+  if (typeof value === 'string' && (value.match(/\(Prefix:/) || value.match(/\(Suffix:/))) {
+    return "<span class='around-noun'>" + value + "</span>";
+  }
+  return value;
+}
+
 function requestSuccess(res) {
   if (res.ok) {
     res.json().then(data => {
-      Elem.koreanResult.innerText = JSON.stringify(data);
+      Elem.koreanResult.innerHTML = JSON.stringify(data, color_code, 4);
     });
   } else {
     console.log("Looks like the response wasn't perfect, got status", res.status);
