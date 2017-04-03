@@ -114,6 +114,7 @@ a {
 }
 
 #github {
+  clear: both;
   float: right;
   padding: 20px;
   height: 60px;

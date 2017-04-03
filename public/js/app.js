@@ -18,19 +18,22 @@ function requestProcess(api, text) {
   fetch(url, { method }).then(requestSuccess, requestError);
 }
 
+function koreanTextInput() {
+  var koreanText = Elem.koreanInput.value;
+  koreanText = koreanText.replace(/\n/g, " ");
+  return koreanText;
+}
+
 function extractPhrases() {
-  const koreanText = Elem.koreanInput.value;
-  requestProcess('extractPhrases', koreanText);
+  requestProcess('extractPhrases', koreanTextInput());
 }
 
 function tokenize() {
-  const koreanText = Elem.koreanInput.value;
-  requestProcess('tokenize', koreanText);
+  requestProcess('tokenize', koreanTextInput());
 }
 
 function normalize() {
-  const koreanText = Elem.koreanInput.value;
-  requestProcess('normalize', koreanText);
+  requestProcess('normalize', koreanTextInput());
 }
 
 function checkKoreanInput() {
@@ -42,21 +45,12 @@ window.addEventListener('load', () => {
   Elem.koreanInput = document.querySelector('#korean_input');
   Elem.koreanLen = document.querySelector('#korean_len');
   Elem.koreanResult = document.querySelector('#korean_result');
-  Elem.normalizeButton = document.querySelector('#normalize_button');
-  Elem.tokenizeButton = document.querySelector('#tokenize_button');
-  Elem.extractPhrasesButton = document.querySelector('#extract_phrases_button');
 
   Elem.koreanInput.addEventListener('keyup', checkKoreanInput);
-  Elem.normalizeButton.addEventListener('click', normalize);
-  Elem.tokenizeButton.addEventListener('click', tokenize);
-  Elem.extractPhrasesButton.addEventListener('click', extractPhrases);
 });
 
 var Elem = {
   koreanInput: null,
   koreanLen: null,
   koreanResult: null,
-  normalizeButton: null,
-  tokenizeButton: null,
-  extractPhrasesButton: null,
 };
