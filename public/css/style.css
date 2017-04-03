@@ -79,7 +79,7 @@ a {
 
 .textbox {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   background-color: #fff;
 }
 
@@ -114,6 +114,7 @@ a {
 }
 
 #github {
+  clear: both;
   float: right;
   padding: 20px;
   height: 60px;
