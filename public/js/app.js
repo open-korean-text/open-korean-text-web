@@ -1,6 +1,6 @@
 function requestError(err) {
   $('.loading').addClass('hide')
-  alert("Fetch failed!", err);
+  Materialize.toast("Fetch failed! " + err, 4000, 'red')
 }
 
 function color_code(key, value) {
@@ -18,9 +18,9 @@ function requestSuccess(res) {
   if (res.ok) {
     res.json().then(data => {
       Elem.koreanResult.innerHTML = JSON.stringify(data, color_code, 4);
-    });
+    });x
   } else {
-    alert("Looks like the response wasn't perfect, got status", res.status);
+    Materialize.toast("Looks like the response wasn't perfect... Status " + res.status, 4000, 'red');
   }
 }
 
@@ -40,12 +40,12 @@ function koreanTextInput() {
 function checkKoreanInput() {
   const koreanLen = Elem.koreanInput.value.length;
 
-  if (koreanLen > 1000) {
+  if (koreanLen > 800) {
     var koreanText = Elem.koreanInput.value;
-    Elem.koreanInput.value = koreanText.substr(0, 1000);
-    Elem.koreanLen.innerHTML = '<font color=red>1000/1000</font>';
+    Elem.koreanInput.value = koreanText.substr(0, 800);
+    Elem.koreanLen.innerHTML = '<font color=red>800/800</font>';
   } else {
-    Elem.koreanLen.innerHTML = `${koreanLen}/1000`;
+    Elem.koreanLen.innerHTML = `${koreanLen}/800`;
   }
 
   Elem.koreanInput.style.height = "1px";
