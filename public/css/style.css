@@ -147,8 +147,12 @@ a {
 }
 
 .loading {
-    position: relative;
-    top: 80px;
+    position: absolute;
+    top: 180px;
     left: 48%;
     float: left;
+}
+
+.relative-container {
+    position: relative;
 }
