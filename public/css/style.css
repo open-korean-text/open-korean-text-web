@@ -125,6 +125,7 @@ a {
     height: 60px;
     padding-right: 20px;
     padding-top: 50px;
+    padding-bottom: 40px;
     vertical-align: middle;
     text-decoration: none;
 }
@@ -219,4 +220,16 @@ a {
 
 #leaderboard {
     padding-top: 10px;
+}
+
+.gradation-background {
+    background-image: linear-gradient(to right, #ff53a9, #bf83be 31%, #86acd0 66%, #2cd6f7) !important;
+}
+
+.title a {
+    color: white;
+}
+
+.no-text-transform {
+    text-transform: none !important;
 }
