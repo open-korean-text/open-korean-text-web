@@ -48,7 +48,9 @@ class ActionButton extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <ActionButtonGroup/>,
-  document.getElementById('buttons')
-);
+window.addEventListener('load', function() {
+  ReactDOM.render(
+    <ActionButtonGroup/>,
+    document.getElementById('buttons')
+  );
+});

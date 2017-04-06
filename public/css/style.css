@@ -156,3 +156,67 @@ a {
 .relative-container {
     position: relative;
 }
+
+.problem .question {
+    line-height: 50px;
+    font-size: 20px;
+}
+
+#instruction {
+    padding-top: 70px;
+    font-size: 14px;
+}
+
+#logged_in_container {
+    display: none;
+}
+
+
+#logged_out_container {
+    display: none;
+}
+
+#welcome {
+    padding-top: 50px;
+}
+
+#user-info {
+    padding-top: 20px;
+}
+
+.search_icon {
+    width: 25px;
+    height: 25px;
+    padding-left: 10px;
+    vertical-align: text-bottom;
+    box-sizing: content-box;
+}
+
+#legends {
+    display: none;
+    padding-top: 40px;
+}
+
+.pos {
+    font-weight: bold;
+    font-size: medium;
+    color: #000;
+}
+
+.legends-desc {
+    color: #777;
+}
+
+.pos-title {
+    font-size: large;
+    color: teal;
+}
+
+#leaderboard-row {
+    display: none;
+    padding-top: 40px;
+}
+
+#leaderboard {
+    padding-top: 10px;
+}

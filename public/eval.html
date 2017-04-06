@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <title>open-korean-text-web</title>
+
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase-database.js"></script>
+
+  <script src="js/firebase.js"></script>
+  <script src="js/google_analytics.js"></script>
+
+  <script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet"
+        href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css"/>
+
+  <script type="text/babel" src="js/eval_control.jsx"></script>
+</head>
+
+<body>
+
+<div class="header">
+  <h1 class="title">open-korean-text</h1>
+</div>
+
+<div class="main_container">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div id="logged_out_container">
+        <div class="center-align" id="welcome">
+          open-korean-text 프로젝트 성능개선에 참여해 주셔서 감사합니다.<BR>
+          아래 버튼으로 구글 로그인 후에 참여하실 수 있습니다.
+        </div>
+        <div id="firebaseui-auth-container"></div>
+      </div>
+      <div id="logged_in_container">
+        <div id="user-info" class="right"></div>
+        <div id="instruction">
+          다음 중 아래의 어구를 가장 잘 분석한 결과를 선택해 주세요.
+        </div>
+        <div id="vote_container">
+          <div class="preloader-wrapper active loading">
+            <div class="spinner-layer spinner-red-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row clear" id="legends">
+          <div class="col s12 m12 l12">
+            <div class="pos-title">open-korean-text의 품사들</div>
+          </div>
+          <div class="col s12 m6 l6">
+            <ul class="collection">
+              <li class="collection-item legends-desc">
+                <span class="pos">명사</span>
+                사물의 이름<BR>
+                하늘, 나무, 사랑, 희망, 대한민국
+              </li>
+              <li class="collection-item legends-desc">
+                <span class="pos">조사</span>
+                명사, 부사, 어미 뒤에서 문법적 관계를 나타냄<BR>
+                -은, -는, -이, -가, -와
+              </li>
+              <li class="collection-item legends-desc">
+                <span class="pos">접두사</span>
+                명사 앞에 붙어 의미를 더해 줌<BR>
+                초-, 개-, 왕-, 핵-
+              </li>
+              <li class="collection-item legends-desc">
+                <span class="pos">접마사</span>
+                명사 뒤에 붙어 의미를 더해 줌<BR>
+                -님, -이, -쟁이, -들
+              </li>
+
+              <li class="collection-item legends-desc">
+                <span class="pos">지시사</span>
+                가리키는 말<BR>
+                이, 그, 저, 저런
+              </li>
+
+              <li class="collection-item legends-desc">
+                <span class="pos">연결사</span>
+                문장을 연결하는 말<BR>
+                그래서, 근데, 또
+              </li>
+            </ul>
+          </div>
+
+          <div class="col s12 m6 l6">
+            <ul class="collection">
+              <li class="collection-item legends-desc">
+                <span class="pos">동사</span> 사물의 동작<BR>
+                가다, 먹다, 자다, 일하다
+              </li>
+              <li class="collection-item legends-desc">
+                <span class="pos">형용사</span> 사물의 상태<BR>
+                아름답다, 새로운, 쓰다, 쓰는, 있다, 좋지 + 않다.<BR>
+                (편의상 명사를 꾸미는 "아름다운" 등의 관형사와 구분하지 않았습니다.)
+              </li>
+              <li class="collection-item legends-desc">
+                <span class="pos">어미</span> 동사와 형용사의 끝에 오는 형태소<BR>
+                -다, -습니다, -느냐, -자, -어라
+              </li>
+              <li class="collection-item legends-desc">
+                <span class="pos">선어말어미</span> 어미 앞에서 시제나 높임을 표시함<BR>
+                -았-, -었-, -시-, -십-. (하셨습니다: 하(동사) + 셨(선어말어미) + 습(선어말어미) + 니다(어미))
+              </li>
+
+              <li class="collection-item legends-desc">
+                <span class="pos">감탄사</span> 감동·부름·놀람·응답 등을 나타내는 단어<BR>
+                아, 어머, 이런, 제길슨
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row clear" id="leaderboard-row">
+          <div class="col s12 m12 l12">
+            <div class="pos-title">Top 10 Contributors</div>
+            <div id="leaderboard" ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
