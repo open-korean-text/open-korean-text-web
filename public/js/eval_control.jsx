@@ -37,7 +37,7 @@ class VoteGroup extends React.Component {
     })
 
     defaultDatabase.ref('/tokenization_votes/' + userUID).once('value').then(function (snapshot) {
-      var prevAnswers = snapshot.val();
+      var prevAnswers = snapshot.val() || {};
       var prevAnswerSize = Object.keys(prevAnswers).length;
 
       if (prevAnswers[questionNumber] && prevAnswerSize < 3000) {
@@ -157,7 +157,7 @@ window.addEventListener('load', function () {
 
       userUID = user.uid;
       userData = user.providerData[0];
-      // document.getElementById('sign-in-status').textContent = "Hi, " + user.providerData[0]["displayName"] + "!";
+
       ReactDOM.render(
         <div className="chip">
           <img src={userData["photoURL"]}/>
@@ -177,9 +177,7 @@ window.addEventListener('load', function () {
     } else {
       $("#logged_out_container").show();
       $("#logged_in_container").hide();
-      // Initialize the FirebaseUI Widget using Firebase.
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
     }
   });
