@@ -12,8 +12,16 @@ class VoteGroup extends React.Component {
 
   handleSubmit() {
     var ref = defaultDatabase.ref('/tokenization_votes/' + userUID + "/" + questionNumber + "/");
-
     ref.set(this.state.selectedCandidate);
+
+    var leaderboardData = {
+      name: userData["displayName"],
+      img: userData["photoURL"],
+      count: prevAnswerSize + 1
+    }
+
+    var ref = defaultDatabase.ref('/leaderboard/' + userUID + "/");
+    ref.set(leaderboardData);
 
     location.reload();
   }
@@ -38,7 +46,7 @@ class VoteGroup extends React.Component {
 
     defaultDatabase.ref('/tokenization_votes/' + userUID).once('value').then(function (snapshot) {
       var prevAnswers = snapshot.val() || {};
-      var prevAnswerSize = Object.keys(prevAnswers).length;
+      prevAnswerSize = Object.keys(prevAnswers).length;
 
       if (prevAnswers[questionNumber] && prevAnswerSize < 3000) {
         location.reload();
@@ -85,6 +93,8 @@ class VoteGroup extends React.Component {
   }
 }
 
+var prevAnswerSize;
+
 function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
@@ -119,6 +129,56 @@ class Answer extends React.Component {
       <a href="#!" className={"collection-item waves-effect waves-light " + this.isActive()}
          onClick={this.props.clickAction}
       >{parse}</a>
+    );
+  }
+}
+
+class LeaderBoard extends React.Component {
+  render() {
+    var leaders = this.props.data;
+    var sortable = []
+    for (var user in leaders) {
+      sortable.push([user, leaders[user]["count"]]);
+    }
+    sortable.sort(function (a, b) {
+      return b[1] - a[1];
+    });
+
+    var tags = sortable.slice(0,10).map(function (user) {
+      var leader = leaders[user[0]]
+      return (
+        <UserTag photoURL={leader["img"]} displayName={leader["name"]}
+                 action="count"
+                 key={user[0]}
+                 count={leader["count"]}/>
+      )
+    });
+    return (
+      <div>
+        {tags}
+      </div>
+    );
+  }
+}
+
+class UserTag extends React.Component {
+  actionButton() {
+    if (this.props.action === "sign_out") {
+      return <a href="#!" onClick={this.props.action_func}> [Sign Out]</a>
+    }
+
+    if (this.props.action === "count") {
+      return " [" + this.props.count + "]"
+    }
+  }
+
+  render() {
+    return (
+      <div className="chip">
+        <img src={this.props.photoURL}/>
+        {this.props.displayName}
+        {this.actionButton()}
+      </div>
     );
   }
 }
@@ -159,11 +219,10 @@ window.addEventListener('load', function () {
       userData = user.providerData[0];
 
       ReactDOM.render(
-        <div className="chip">
-          <img src={userData["photoURL"]}/>
-          {userData["displayName"]}
-          <a href="#!" onClick={logout}> [sign out]</a>
-        </div>,
+        <UserTag photoURL={userData["photoURL"]} displayName={userData["displayName"]}
+                 action="sign_out"
+                 action_func={logout}
+        />,
         document.getElementById('user-info')
       );
 
@@ -174,6 +233,17 @@ window.addEventListener('load', function () {
           document.getElementById('vote_container')
         );
       });
+
+      var leaderBoard = firebase.database().ref('leaderboard').orderByChild('count');
+      leaderBoard.on('value', function (s) {
+        $("#leaderboard-row").show();
+
+        ReactDOM.render(
+          <LeaderBoard data={s.val()}/>,
+          document.getElementById('leaderboard')
+        );
+      })
+
     } else {
       $("#logged_out_container").show();
       $("#logged_in_container").hide();

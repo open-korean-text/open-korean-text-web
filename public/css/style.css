@@ -211,3 +211,12 @@ a {
     font-size: large;
     color: teal;
 }
+
+#leaderboard-row {
+    display: none;
+    padding-top: 40px;
+}
+
+#leaderboard {
+    padding-top: 10px;
+}
