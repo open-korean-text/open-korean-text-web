@@ -191,3 +191,23 @@ a {
     vertical-align: text-bottom;
     box-sizing: content-box;
 }
+
+#legends {
+    display: none;
+    padding-top: 40px;
+}
+
+.pos {
+    font-weight: bold;
+    font-size: medium;
+    color: #000;
+}
+
+.legends-desc {
+    color: #777;
+}
+
+.pos-title {
+    font-size: large;
+    color: teal;
+}

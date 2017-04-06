@@ -112,6 +112,7 @@ class Answer extends React.Component {
     parse = replaceAll(parse, "Prefix", "접두사");
     parse = replaceAll(parse, "Determiner", "지시사");
     parse = replaceAll(parse, "Exclamation", "감탄사");
+    parse = replaceAll(parse, "Conjunction", "연결사");
     parse = replaceAll(parse, "/", " / ");
 
     return (
@@ -167,6 +168,7 @@ window.addEventListener('load', function () {
       );
 
       ref.once('value').then(function (snapshot) {
+        $("#legends").show();
         ReactDOM.render(
           <VoteGroup data={snapshot.val()}/>,
           document.getElementById('vote_container')
