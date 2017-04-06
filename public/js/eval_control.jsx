@@ -212,6 +212,14 @@ window.addEventListener('load', function () {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+      ref.once('value').then(function (snapshot) {
+        $("#legends").show();
+        ReactDOM.render(
+          <VoteGroup data={snapshot.val()}/>,
+          document.getElementById('vote_container')
+        );
+      });
+
       $("#logged_in_container").show();
       $("#logged_out_container").hide();
 
@@ -225,14 +233,6 @@ window.addEventListener('load', function () {
         />,
         document.getElementById('user-info')
       );
-
-      ref.once('value').then(function (snapshot) {
-        $("#legends").show();
-        ReactDOM.render(
-          <VoteGroup data={snapshot.val()}/>,
-          document.getElementById('vote_container')
-        );
-      });
 
       var leaderBoard = firebase.database().ref('leaderboard').orderByChild('count');
       leaderBoard.on('value', function (s) {
