@@ -69,6 +69,12 @@ class VoteGroup extends React.Component {
                   clickAction={this.handleClick.bind(this, "wrong")}
                   current={this.state.selectedCandidate}
           />
+          <Answer key="dunno"
+                  answerKey="dunno"
+                  answer="모르겠음"
+                  clickAction={this.handleClick.bind(this, "dunno")}
+                  current={this.state.selectedCandidate}
+          />
         </div>
         <a className="submit_button btn disabled waves-effect waves-light right"
            id="submit_button"
