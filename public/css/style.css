@@ -233,3 +233,8 @@ a {
 .no-text-transform {
     text-transform: none !important;
 }
+
+#eval {
+    padding-top: 22px;
+    padding-right: 5%;
+}
