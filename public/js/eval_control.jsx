@@ -11,7 +11,6 @@ class VoteGroup extends React.Component {
   }
 
   handleSubmit() {
-    console.log('/tokenization_votes/' + this.props.userUID + "/" + this.props.questionNumber + "/");
     var ref = defaultDatabase.ref('/tokenization_votes/' + this.props.userUID + "/" + this.props.questionNumber + "/");
     ref.set(this.state.selectedCandidate);
 
@@ -34,12 +33,12 @@ class VoteGroup extends React.Component {
                      clickAction={thisPointer.handleClick.bind(thisPointer, key)}
                      current={thisPointer.state.selectedCandidate}
       />
-    })
+    });
 
     return (
       <div className="problem">
         <div className="right" id="prev_answer_count">
-          {prevAnswerSize} / 200
+          {this.props.questionNumber} / 200
         </div>
 
         <div className="question">
@@ -176,7 +175,7 @@ var uiConfig = {
   ],
 };
 
-function renderQuestion(prevAnswerSize, userData, userUID) {
+function renderQuestion(prevAnswerSize, prevAnswers, userData, userUID) {
   var leaderBoard = firebase.database().ref('leaderboard').orderByChild('count');
   leaderBoard.on('value', function (s) {
     $("#leaderboard-row").show();
@@ -197,7 +196,11 @@ function renderQuestion(prevAnswerSize, userData, userUID) {
   var ref = defaultDatabase.ref('/leaderboard/' + userUID + "/");
   ref.set(leaderboardData);
 
-  var questionNumber = (prevAnswerSize + 1);
+  var questionNumber = 1;
+
+  while (questionNumber in prevAnswers) {
+    questionNumber++;
+  }
 
   var ref = defaultDatabase.ref('/tokenization_examples/' + questionNumber);
   ref.once('value').then(function (snapshot2) {
@@ -240,7 +243,7 @@ window.addEventListener('load', function () {
       defaultDatabase.ref('/tokenization_votes/' + userUID).once('value').then(function (snapshot) {
         var prevAnswers = snapshot.val() || {};
         prevAnswerSize = Object.keys(prevAnswers).length || 0;
-        renderQuestion(prevAnswerSize, userData, userUID)
+        renderQuestion(prevAnswerSize, prevAnswers, userData, userUID)
       });
     } else {
       $("#logged_out_container").show();
