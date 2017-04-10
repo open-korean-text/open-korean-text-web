@@ -11,17 +11,9 @@ class VoteGroup extends React.Component {
   }
 
   handleSubmit() {
-    var ref = defaultDatabase.ref('/tokenization_votes/' + userUID + "/" + questionNumber + "/");
+    console.log('/tokenization_votes/' + this.props.userUID + "/" + this.props.questionNumber + "/");
+    var ref = defaultDatabase.ref('/tokenization_votes/' + this.props.userUID + "/" + this.props.questionNumber + "/");
     ref.set(this.state.selectedCandidate);
-
-    var leaderboardData = {
-      name: userData["displayName"],
-      img: userData["photoURL"],
-      count: prevAnswerSize + 1
-    }
-
-    var ref = defaultDatabase.ref('/leaderboard/' + userUID + "/");
-    ref.set(leaderboardData);
 
     location.reload();
   }
@@ -44,23 +36,11 @@ class VoteGroup extends React.Component {
       />
     })
 
-    defaultDatabase.ref('/tokenization_votes/' + userUID).once('value').then(function (snapshot) {
-      var prevAnswers = snapshot.val() || {};
-      prevAnswerSize = Object.keys(prevAnswers).length;
-
-      if (prevAnswers[questionNumber] && prevAnswerSize < 3000) {
-        location.reload();
-      }
-
-      ReactDOM.render(
-        <div>{prevAnswerSize} / 3000</div>,
-        document.getElementById('prev_answer_count')
-      );
-    });
-
     return (
       <div className="problem">
-        <div className="right" id="prev_answer_count"></div>
+        <div className="right" id="prev_answer_count">
+          {prevAnswerSize} / 200
+        </div>
 
         <div className="question">
           <blockquote>{data["chunk"]}
@@ -93,7 +73,7 @@ class VoteGroup extends React.Component {
   }
 }
 
-var prevAnswerSize;
+var prevAnswerSize = 0;
 
 function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
@@ -196,8 +176,38 @@ var uiConfig = {
   ],
 };
 
-var userUID;
-var userData;
+function renderQuestion(prevAnswerSize, userData, userUID) {
+  var leaderBoard = firebase.database().ref('leaderboard').orderByChild('count');
+  leaderBoard.on('value', function (s) {
+    $("#leaderboard-row").show();
+
+    ReactDOM.render(
+      <LeaderBoard data={s.val()}/>,
+      document.getElementById('leaderboard')
+    );
+  });
+
+
+  var leaderboardData = {
+    name: userData["displayName"],
+    img: userData["photoURL"],
+    count: prevAnswerSize
+  }
+
+  var ref = defaultDatabase.ref('/leaderboard/' + userUID + "/");
+  ref.set(leaderboardData);
+
+  var questionNumber = (prevAnswerSize + 1);
+
+  var ref = defaultDatabase.ref('/tokenization_examples/' + questionNumber);
+  ref.once('value').then(function (snapshot2) {
+    $("#legends").show();
+    ReactDOM.render(
+      <VoteGroup data={snapshot2.val()} userUID={userUID} questionNumber={questionNumber}/>,
+      document.getElementById('vote_container')
+    );
+  });
+}
 
 window.addEventListener('load', function () {
   var logout = function () {
@@ -212,19 +222,11 @@ window.addEventListener('load', function () {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      ref.once('value').then(function (snapshot) {
-        $("#legends").show();
-        ReactDOM.render(
-          <VoteGroup data={snapshot.val()}/>,
-          document.getElementById('vote_container')
-        );
-      });
-
       $("#logged_in_container").show();
       $("#logged_out_container").hide();
 
-      userUID = user.uid;
-      userData = user.providerData[0];
+      const userUID = user.uid;
+      const userData = user.providerData[0];
 
       ReactDOM.render(
         <UserTag photoURL={userData["photoURL"]} displayName={userData["displayName"]}
@@ -234,16 +236,12 @@ window.addEventListener('load', function () {
         document.getElementById('user-info')
       );
 
-      var leaderBoard = firebase.database().ref('leaderboard').orderByChild('count');
-      leaderBoard.on('value', function (s) {
-        $("#leaderboard-row").show();
-
-        ReactDOM.render(
-          <LeaderBoard data={s.val()}/>,
-          document.getElementById('leaderboard')
-        );
-      })
-
+      // Previous vote
+      defaultDatabase.ref('/tokenization_votes/' + userUID).once('value').then(function (snapshot) {
+        var prevAnswers = snapshot.val() || {};
+        prevAnswerSize = Object.keys(prevAnswers).length || 0;
+        renderQuestion(prevAnswerSize, userData, userUID)
+      });
     } else {
       $("#logged_out_container").show();
       $("#logged_in_container").hide();

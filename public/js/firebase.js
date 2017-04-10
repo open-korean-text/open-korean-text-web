@@ -16,6 +16,3 @@ var defaultApp = firebase.initializeApp(config);
 
 var defaultDatabase = defaultApp.database();
 
-var questionNumber = getRandomInt(1, 3000)
-
-var ref = defaultDatabase.ref('/tokenization_examples/' + questionNumber);
