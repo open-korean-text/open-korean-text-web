@@ -26,7 +26,7 @@ function requestSuccess(res) {
 
 function requestProcess(api, text) {
   $('.loading').removeClass('hide')
-  const url = `https://open-korean-text.herokuapp.com/${api}?text=${text}`;
+  const url = `https://open-korean-text-api.herokuapp.com/${api}?text=${text}`;
   const method = 'GET';
   fetch(url, { method }).then(requestSuccess, requestError);
 }
